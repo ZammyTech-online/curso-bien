@@ -5,13 +5,18 @@ on:
     branches: [ develop ]
     types: [ opened, reopened, synchronize ]
 
+  push:
+    branches:
+      - feature/*
+      - develop
+
 jobs:
   build-feature:
     runs-on: ubuntu-latest
 
     steps:
-      ##########################################################################################
-      # - Download code from feature branch, setup java 17 and check that source code is buildable
+      ############################################################################################
+      # - Download code from feature branch, setup Java 17 and check that source code is buildable
       ############################################################################################
       - name: Checkout code
         uses: actions/checkout@v3
@@ -23,7 +28,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
-      
+
       - name: Cache Maven dependencies
         uses: actions/cache@v2
         with:
